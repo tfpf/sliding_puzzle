@@ -19,7 +19,7 @@ def main():
     sliding_puzzle.imsize = 150
 
     # create puzzle
-    puzzle = sliding_puzzle.sliding_puzzle(tk.Tk(), 4, image)
+    puzzle = sliding_puzzle.sliding_puzzle(tk.Tk(), 3, image)
     puzzle.mainloop()
 
 ###############################################################################

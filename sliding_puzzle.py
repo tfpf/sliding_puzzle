@@ -4,6 +4,7 @@ import cv2
 import itertools
 import numpy as np
 import os
+import random
 import tkinter as tk
 
 ###############################################################################
@@ -21,13 +22,18 @@ constructor. All sub-images are then resized to `imsize' and saved to the disk,
 so that they can be used the next time this program is run. The input image
 must be square in shape for this to work as expected.
 
-Each sub-image is a button, which, when clicked, will move to the empty
+Each sub-image is put on a button, which, when clicked, will move to the empty
 slot if possible. The spacing between the sub-images can be controlled by
 changing `pad'.
+
+All sub-images must be bound to a class member variable (`images') before
+putting them on the buttons. Otherwise, the garbage collector deletes them
+before the can be used.
 
 Attributes:
     size: int (maximum number of sub-images per row or column)
     images: list (list of sub-images)
+    buttons: list (list of buttons the sub-images are drawn on)
     vacant: tuple (indicates which location is currently vacant)
 
 Methods:
@@ -41,6 +47,7 @@ Methods:
         self.grid(padx = pad, pady = pad)
         self.size = size
         self.images = []
+        self.buttons = []
         parent.title('Sliding Puzzle')
         parent.resizable(False, False)
 
@@ -60,13 +67,21 @@ Methods:
                 cv2.imwrite(f'img{i}.png', img_crop)
         finally:
             for i, (r, c) in enumerate(itertools.product(range(self.size), range(self.size))):
+
+                # do not draw the last button because that slot must be empty
+                if i == self.size * self.size - 1:
+                    break
+
                 self.images.append(tk.PhotoImage(file = f'img{i}.png')) 
                 button = tk.Button(self, image = self.images[i])
                 button['command'] = lambda _button = button: self.move(_button)
                 button.grid(row = r, column = c)
-            button.destroy()
+                self.buttons.append(button)
 
         self.vacant = (self.size - 1, self.size - 1)
+
+        randomise_button = tk.Button(self, text = 'Randomise', command = self.randomise)
+        randomise_button.grid(row = self.size, columnspan = self.size, pady = (4 * pad, pad))
 
     ########################################
 
@@ -89,4 +104,14 @@ Args:
         if set((abs(vacant_row - button_row), abs(vacant_column - button_column))) == {0, 1}:
             _button.grid(row = vacant_row, column = vacant_column)
             self.vacant = (button_row, button_column)
+
+    ########################################
+
+    def randomise(self):
+        '''\
+Move the sub-images randomly.
+'''
+
+        for button in random.choices(self.buttons, k = 1000):
+            self.move(button)
 
