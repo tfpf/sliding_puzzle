@@ -1,5 +1,5 @@
 # sliding_puzzle
-A sliding puzzle implementation using Python Tkinter. To play, first install the following python packages.
+A sliding puzzle implementation using Python Tkinter. To play, first install the following Python packages.
 * Tkinter
 * OpenCV
 * NumPy (required by OpenCV)
