@@ -4,4 +4,4 @@ A sliding puzzle implementation using Python Tkinter. To play, first install the
 * OpenCV
 * NumPy (required by OpenCV)
 
-Then download or clone this repository. Finally, open a terminal to the download/clone location and run `python3 main.py` and enjoy!
+Then download/clone this repository. Finally, open a terminal to the download/clone location and run `python3 main.py` and enjoy!
