@@ -10,16 +10,20 @@ import sliding_puzzle
 def main():
 
     try:
-        image = sys.argv[1]
+        N = int(sys.argv[1])
+        assert N > 2
+    except (AssertionError, IndexError, ValueError):
+        N = 3
+
+    try:
+        image = sys.argv[2]
     except IndexError:
         image = 'crysis2.png'
 
-    # setup
     sliding_puzzle.pad = 10
-    sliding_puzzle.imsize = 150
+    sliding_puzzle.imsize = 600
 
-    # create puzzle
-    puzzle = sliding_puzzle.sliding_puzzle(tk.Tk(), 3, image)
+    puzzle = sliding_puzzle.sliding_puzzle(tk.Tk(), N, image)
     puzzle.mainloop()
 
 ###############################################################################
