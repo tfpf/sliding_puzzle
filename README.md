@@ -14,7 +14,11 @@ and enjoy! This will create a 3-by-3 sliding puzzle (i.e. an 8-puzzle) using
 the image file 'crysis2.png'.
 
 If you want to use a different image (say, 'myimage.jpg'), delete the cached
-image files (`rm img*.png`) and specify your new image on the command line
+image files
+<br>
+`rm img*.png`
+<br>
+and specify your new image on the command line
 <br>
 `python3 main.py 3 myimage.jpg`
 <br>
