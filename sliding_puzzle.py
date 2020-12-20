@@ -6,6 +6,7 @@ import numpy as np
 import os
 import random
 import tkinter as tk
+import tkinter.messagebox as mb
 
 ###############################################################################
 
@@ -36,6 +37,8 @@ Attributes:
     images: list (list of sub-images)
     buttons: list (list of buttons the sub-images are drawn on)
     vacant: tuple (indicates which location is currently vacant)
+    monitor_status: bool (whether or not to show success message on completion)
+    moves: int (how many moves the user has made)
 
 Methods:
     __init__
@@ -49,6 +52,10 @@ Methods:
         self.N = N
         self.images = []
         self.buttons = []
+        self.vacant = (self.N - 1, self.N - 1)
+        self.monitor_status = False
+        self.moves = 0
+
         parent.title('Sliding Puzzle')
         parent.resizable(False, False)
 
@@ -73,7 +80,6 @@ Methods:
                 button['command'] = lambda _button = button: self.move(_button)
                 button.grid(row = r, column = c)
                 self.buttons.append(button)
-        self.vacant = (self.N - 1, self.N - 1)
 
         randomise_button = tk.Button(self, text = 'Randomise', command = self.randomise)
         randomise_button.grid(row = self.N, columnspan = self.N, pady = (4 * pad, pad))
@@ -100,6 +106,15 @@ Args:
             _button.grid(row = vacant_row, column = vacant_column)
             self.vacant = (button_row, button_column)
 
+        # increment counter only if the game is being monitored
+        if self.monitor_status:
+            self.moves += 1
+
+            # upon completion, stop monitoring
+            if all(i == button.grid_info().get('row') * self.N + button.grid_info().get('column') for i, button in enumerate(self.buttons)):
+                self.monitor_status = False
+                tk.messagebox.showinfo(title = 'Puzzle Solved!', message = f'You have solved the puzzle in {self.moves} moves!')
+
     ########################################
 
     def randomise(self):
@@ -109,4 +124,9 @@ Move the sub-images randomly.
 
         for button in random.choices(self.buttons, k = 1000 * self.N):
             self.move(button)
+
+        # start monitoring the game only after this function is called
+        # i.e. after the user clicks the button to randomise the sub-images
+        self.monitor_status = True
+        self.moves = 0
 
