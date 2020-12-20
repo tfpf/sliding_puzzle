@@ -7,32 +7,26 @@ the following Python packages.
 
 Then download/clone this repository. Finally, open a terminal to the
 download/clone location and run
-<br>
-`python3 main.py 3 crysis2.png`
-<br>
+    python3 main.py 3 crysis2.png
 and enjoy! This will create a 3-by-3 sliding puzzle (i.e. an 8-puzzle) using
 the image file 'crysis2.png'.
 
 If you want to use a different image (say, 'myimage.jpg'), delete the cached
-image files
-<br>
-`rm img*.png`
-<br>
-and specify your new image on the command line
-<br>
-`python3 main.py 3 myimage.jpg`
-<br>
+image files and specify your new image on the command line
+    rm img*.png                            # delete cache
+    python3 main.py 3 /path/to/myimage.jpg # run with your image
 and it should work. Just make sure that 'myimage.jpg' is a square image.
 Otherwise, it may get visibly distorted.
 
 To play at higher difficulty levels, just change the number on the command
 line. For instance,
-<br>
-`python3 main.py 4 myimage.jpg`
-<br>
+    rm img*.png                            # delete cache
+    python3 main.py 4 /path/to/myimage.jpg # run with your image
 will create a 4-by-4 sliding puzzle (i.e. a 15-puzzle), whereas
-<br>
-`python3 main.py 6 myimage.jpg`
-<br>
+    rm img*.png                            # delete cache
+    python3 main.py 6 /path/to/myimage.jpg # run with your image
 will create a 6-by-6 sliding puzzle (i.e. a 35-puzzle).
+
+Deleting the cache is necessary whenever you want to change either the
+difficulty level or the puzzle image.
 
