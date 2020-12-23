@@ -113,7 +113,7 @@ Args:
             # upon completion, stop monitoring
             if all(i == button.grid_info().get('row') * self.N + button.grid_info().get('column') for i, button in enumerate(self.buttons)):
                 self.monitor_status = False
-                tk.messagebox.showinfo(title = 'Puzzle Solved!', message = f'You have solved the puzzle in {self.moves} moves!')
+                mb.showinfo(title = 'Puzzle Solved!', message = f'You have solved the puzzle in {self.moves} moves!')
 
     ########################################
 
