@@ -44,6 +44,7 @@ Methods:
     __init__
     __repr__
     move: move the indicated sub-image to the vacant slot if possible
+    randomise: randomly call `move' a large number of times
 '''
 
     def __init__(self, parent, N = 3, image = 'crysis2.png'):
