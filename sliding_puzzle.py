@@ -123,11 +123,11 @@ Args:
 Move the sub-images randomly.
 '''
 
-        for button in random.choices(self.buttons, k = 1000 * self.N):
-            self.move(button)
-
         # start monitoring the game only after this function is called
         # i.e. after the user clicks the button to randomise the sub-images
-        self.monitor_status = True
+        self.monitor_status = False
+        for button in random.choices(self.buttons, k = 1000 * self.N):
+            self.move(button)
+        self.monitor_status = False
         self.moves = 0
 
